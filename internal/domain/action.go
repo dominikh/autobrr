@@ -59,7 +59,6 @@ type Action struct {
 
 // ParseMacros parse all macros on action
 func (a *Action) ParseMacros(release *Release) error {
-	var err error
 
 	if release.TorrentTmpFile == "" &&
 		(strings.Contains(a.ExecArgs, "TorrentPathName") || strings.Contains(a.ExecArgs, "TorrentDataRawBytes") ||
@@ -84,13 +83,20 @@ func (a *Action) ParseMacros(release *Release) error {
 
 	m := NewMacro(*release)
 
-	a.ExecArgs, err = m.Parse(a.ExecArgs)
-	a.WatchFolder, err = m.Parse(a.WatchFolder)
-	a.Category, err = m.Parse(a.Category)
-	a.Tags, err = m.Parse(a.Tags)
-	a.Label, err = m.Parse(a.Label)
-	a.SavePath, err = m.Parse(a.SavePath)
-	a.WebhookData, err = m.Parse(a.WebhookData)
+	var err error
+	parse := func(s *string) {
+		if err != nil {
+			return
+		}
+		*s, err = m.Parse(*s)
+	}
+	parse(&a.ExecArgs)
+	parse(&a.WatchFolder)
+	parse(&a.Category)
+	parse(&a.Tags)
+	parse(&a.Label)
+	parse(&a.SavePath)
+	parse(&a.WebhookData)
 
 	if err != nil {
 		return errors.Wrap(err, "could not parse macros for action: %v", a.Name)
