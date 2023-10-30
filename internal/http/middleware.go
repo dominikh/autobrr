@@ -4,6 +4,7 @@
 package http
 
 import (
+	"fmt"
 	"net/http"
 	"runtime/debug"
 	"strings"
@@ -59,7 +60,7 @@ func LoggerMiddleware(logger *zerolog.Logger) func(next http.Handler) http.Handl
 					log.Error().
 						Str("type", "error").
 						Timestamp().
-						Interface("recover_info", rec).
+						Str("recover_info", fmt.Sprintf("%v", rec)).
 						Bytes("debug_stack", debug.Stack()).
 						Msg("log system error")
 					http.Error(ww, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
