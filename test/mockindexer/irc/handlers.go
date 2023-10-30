@@ -38,6 +38,6 @@ func CommandHandler(c *Client, cmd []string) {
 	case "PING":
 		c.writer <- fmt.Sprintf("PONG n %s", strings.Join(cmd[1:], " "))
 	case "PRIVMSG":
-		c.writer <- fmt.Sprintf("%s PRIVMSG %s %s", fmt.Sprintf(":%s", c.nick), cmd[1], fmt.Sprintf("%s", strings.Join(cmd[2:], " ")))
+		c.writer <- fmt.Sprintf(":%s PRIVMSG %s %s", c.nick, cmd[1], strings.Join(cmd[2:], " "))
 	}
 }
