@@ -59,8 +59,6 @@ func (s *service) Start() {
 
 	// init jobs
 	go s.addAppJobs()
-
-	return
 }
 
 func (s *service) addAppJobs() {
@@ -85,7 +83,6 @@ func (s *service) addAppJobs() {
 func (s *service) Stop() {
 	s.log.Debug().Msg("scheduler.Stop")
 	s.cron.Stop()
-	return
 }
 
 // ScheduleJob takes a time duration and adds a job

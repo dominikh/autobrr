@@ -40,10 +40,7 @@ func (s *Service) GetLatestRelease(ctx context.Context) *version.Release {
 func (s *Service) CheckUpdates(ctx context.Context) {
 	if _, err := s.CheckUpdateAvailable(ctx); err != nil {
 		s.log.Error().Err(err).Msg("error checking new release")
-		return
 	}
-
-	return
 }
 
 func (s *Service) CheckUpdateAvailable(ctx context.Context) (*version.Release, error) {

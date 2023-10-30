@@ -126,8 +126,6 @@ func (s *service) Process(release *domain.Release) {
 		s.log.Error().Err(err).Msgf("release.Process: error processing filters for indexer: %s", release.Indexer)
 		return
 	}
-
-	return
 }
 
 func (s *service) processFilters(ctx context.Context, filters []domain.Filter, release *domain.Release) error {

@@ -582,8 +582,6 @@ func (h *Handler) onMessage(msg ircmsg.Message) {
 		h.log.Error().Stack().Err(err).Msgf("could not queue line: %s", cleanedMsg)
 		return
 	}
-
-	return
 }
 
 // send the msg to announce processor
@@ -782,8 +780,6 @@ func (h *Handler) handleInvite(msg ircmsg.Message) {
 		h.log.Error().Stack().Err(err).Msgf("error handling join: %s", msg.Params[1])
 		return
 	}
-
-	return
 }
 
 // NickServIdentify sends NickServ Identify commands
@@ -834,8 +830,6 @@ func (h *Handler) handleMode(msg ircmsg.Message) {
 
 		return
 	}
-
-	return
 }
 
 func (h *Handler) SendMsg(channel, msg string) error {

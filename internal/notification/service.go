@@ -135,8 +135,6 @@ func (s *service) registerSenders() {
 			}
 		}
 	}
-
-	return
 }
 
 // Send notifications
@@ -153,8 +151,6 @@ func (s *service) Send(event domain.NotificationEvent, payload domain.Notificati
 			}
 		}
 	}()
-
-	return
 }
 
 func (s *service) Test(ctx context.Context, notification domain.Notification) error {

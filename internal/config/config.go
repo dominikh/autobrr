@@ -273,8 +273,6 @@ func (c *AppConfig) DynamicReload(log logger.Logger) {
 		c.m.Unlock()
 	})
 	viper.WatchConfig()
-
-	return
 }
 
 func (c *AppConfig) UpdateConfig() error {
