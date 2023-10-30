@@ -142,13 +142,6 @@ func (h *Handler) InitIndexers(definitions []*domain.IndexerDefinition) {
 	}
 }
 
-func (h *Handler) removeIndexer() {
-	// TODO remove validAnnouncers
-	// TODO remove validChannels
-	// TODO remove definition
-	// TODO remove announceProcessor
-}
-
 func (h *Handler) Run() error {
 	// TODO validate
 	// check if network requires nickserv
@@ -251,12 +244,6 @@ func (h *Handler) Run() error {
 	return nil
 }
 
-func (h *Handler) isOurNick(nick string) bool {
-	h.m.RLock()
-	defer h.m.RUnlock()
-	return h.network.Nick == nick
-}
-
 func (h *Handler) isOurCurrentNick(nick string) bool {
 	h.m.RLock()
 	defer h.m.RUnlock()
@@ -274,13 +261,6 @@ func (h *Handler) setConnectionStatus() {
 	//	//h.channelHealth = map[string]*channelHealth{}
 	//	h.resetChannelHealth()
 	//}
-}
-
-func (h *Handler) resetConnectionStatus() {
-	h.m.Lock()
-	h.connectedSince = time.Time{}
-	h.resetChannelHealth()
-	h.m.Unlock()
 }
 
 func (h *Handler) GetNetwork() *domain.IrcNetwork {

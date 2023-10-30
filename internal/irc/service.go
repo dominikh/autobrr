@@ -47,11 +47,9 @@ type service struct {
 	releaseService      release.Service
 	indexerService      indexer.Service
 	notificationService notification.Service
-	indexerMap          map[string]string
 	handlers            map[int64]*Handler
 
-	stopWG sync.WaitGroup
-	lock   sync.RWMutex
+	lock sync.RWMutex
 }
 
 const sseMaxEntries = 1000

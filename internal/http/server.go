@@ -151,12 +151,3 @@ func (s Server) Handler() http.Handler {
 
 	return r
 }
-
-func (s Server) index(w http.ResponseWriter, r *http.Request) {
-	p := web.IndexParams{
-		Title:   "Dashboard",
-		Version: s.version,
-		BaseUrl: s.config.Config.BaseURL,
-	}
-	web.Index(w, p)
-}

@@ -493,51 +493,6 @@ func (repo *ReleaseRepo) GetActionStatus(ctx context.Context, req *domain.GetRel
 	return &rls, nil
 }
 
-func (repo *ReleaseRepo) attachActionStatus(ctx context.Context, tx *Tx, releaseID int64) ([]domain.ReleaseActionStatus, error) {
-	queryBuilder := repo.db.squirrel.
-		Select("id", "status", "action", "action_id", "type", "client", "filter", "filter_id", "release_id", "rejections", "timestamp").
-		From("release_action_status").
-		Where(sq.Eq{"release_id": releaseID})
-
-	query, args, err := queryBuilder.ToSql()
-	if err != nil {
-		return nil, errors.Wrap(err, "error building query")
-	}
-
-	res := make([]domain.ReleaseActionStatus, 0)
-
-	rows, err := tx.QueryContext(ctx, query, args...)
-	if err != nil {
-		return res, errors.Wrap(err, "error executing query")
-	}
-
-	defer rows.Close()
-
-	if err := rows.Err(); err != nil {
-		return res, errors.Wrap(err, "error rows")
-	}
-
-	for rows.Next() {
-		var rls domain.ReleaseActionStatus
-
-		var client, filter sql.NullString
-		var actionId, filterID sql.NullInt64
-
-		if err := rows.Scan(&rls.ID, &rls.Status, &rls.Action, &actionId, &rls.Type, &client, &filter, &filterID, &rls.ReleaseID, pq.Array(&rls.Rejections), &rls.Timestamp); err != nil {
-			return res, errors.Wrap(err, "error scanning row")
-		}
-
-		rls.ActionID = actionId.Int64
-		rls.Client = client.String
-		rls.Filter = filter.String
-		rls.FilterID = filterID.Int64
-
-		res = append(res, rls)
-	}
-
-	return res, nil
-}
-
 func (repo *ReleaseRepo) Stats(ctx context.Context) (*domain.ReleaseStats, error) {
 
 	query := `SELECT *

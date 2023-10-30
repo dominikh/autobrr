@@ -5,7 +5,6 @@ package server
 
 import (
 	"context"
-	"sync"
 	"time"
 
 	"github.com/autobrr/autobrr/internal/domain"
@@ -28,9 +27,6 @@ type Server struct {
 	feedService    feed.Service
 	scheduler      scheduler.Service
 	updateService  *update.Service
-
-	stopWG sync.WaitGroup
-	lock   sync.Mutex
 }
 
 func NewServer(log logger.Logger, config *domain.Config, ircSvc irc.Service, indexerSvc indexer.Service, feedSvc feed.Service, scheduler scheduler.Service, updateSvc *update.Service) *Server {

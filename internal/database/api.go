@@ -25,9 +25,8 @@ func NewAPIRepo(log logger.Logger, db *DB) domain.APIRepo {
 }
 
 type APIRepo struct {
-	log   zerolog.Logger
-	db    *DB
-	cache map[string]domain.APIKey
+	log zerolog.Logger
+	db  *DB
 }
 
 func (r *APIRepo) Store(ctx context.Context, key *domain.APIKey) error {

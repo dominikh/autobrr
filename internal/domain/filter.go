@@ -697,10 +697,6 @@ func containsAll(tags []string, filter string) bool {
 	return containsAllMatch(tags, strings.Split(filter, ","))
 }
 
-func containsAnyOther(filter string, tags ...string) bool {
-	return containsMatch(tags, strings.Split(filter, ","))
-}
-
 func sliceContainsSlice(tags []string, filters []string) bool {
 	return containsMatchBasic(tags, filters)
 }

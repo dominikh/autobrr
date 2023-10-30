@@ -226,21 +226,6 @@ func (w SSEWriter) formatLevel(evt map[string]interface{}) string {
 	return ""
 }
 
-// formatTime format time to string
-func (w SSEWriter) formatTime(evt map[string]interface{}) string {
-	var f Formatter
-
-	f = defaultFormatTimestamp(w.TimeFormat)
-
-	var s = f(evt["time"])
-
-	if len(s) > 0 {
-		return s
-	}
-
-	return ""
-}
-
 const (
 	defaultTimeFormat = time.Kitchen
 )
