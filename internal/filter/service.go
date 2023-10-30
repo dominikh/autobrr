@@ -145,7 +145,7 @@ func (s *service) FindByIndexerIdentifier(ctx context.Context, indexer string) (
 }
 
 func (s *service) GetDownloadsByFilterId(ctx context.Context, filterID int) (*domain.FilterDownloads, error) {
-	return s.GetDownloadsByFilterId(ctx, filterID)
+	return s.repo.GetDownloadsByFilterId(ctx, filterID)
 }
 
 func (s *service) Store(ctx context.Context, filter *domain.Filter) error {
