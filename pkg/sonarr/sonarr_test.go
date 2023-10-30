@@ -5,7 +5,7 @@ package sonarr
 
 import (
 	"context"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -20,7 +20,7 @@ import (
 func Test_client_Push(t *testing.T) {
 	// disable logger
 	zerolog.SetGlobalLevel(zerolog.Disabled)
-	log.SetOutput(ioutil.Discard)
+	log.SetOutput(io.Discard)
 
 	mux := http.NewServeMux()
 	ts := httptest.NewServer(mux)
@@ -125,7 +125,7 @@ func Test_client_Push(t *testing.T) {
 func Test_client_Test(t *testing.T) {
 	// disable logger
 	zerolog.SetGlobalLevel(zerolog.Disabled)
-	log.SetOutput(ioutil.Discard)
+	log.SetOutput(io.Discard)
 
 	key := "mock-key"
 
