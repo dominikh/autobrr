@@ -61,7 +61,7 @@ func main() {
 		line := r.Form.Get("line")
 		s.SendAll(line)
 
-		http.Redirect(w, r, "/", 302)
+		http.Redirect(w, r, "/", http.StatusFound)
 	})
 
 	http.ListenAndServe("localhost:3999", r)

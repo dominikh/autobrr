@@ -729,7 +729,7 @@ func (s *service) webhook(ctx context.Context, external domain.FilterExternal, r
 			}
 
 			// add header to req
-			req.Header.Add(http.CanonicalHeaderKey(h[0]), h[1])
+			req.Header.Add(h[0], h[1])
 		}
 	}
 

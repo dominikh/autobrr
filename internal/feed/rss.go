@@ -296,12 +296,7 @@ func (j *RSSJob) getFeed(ctx context.Context) (items []*gofeed.Item, err error) 
 func isNewerThanMaxAge(maxAge int, item, now time.Time) bool {
 	// now minus max age
 	nowMaxAge := now.Add(time.Duration(-maxAge) * time.Second)
-
-	if item.After(nowMaxAge) {
-		return true
-	}
-
-	return false
+	return item.After(nowMaxAge)
 }
 
 // isFreeleech basic freeleech parsing

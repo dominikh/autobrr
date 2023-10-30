@@ -116,14 +116,12 @@ func (a *announceProcessor) processQueue(queue chan string) {
 }
 
 func (a *announceProcessor) getNextLine(queue chan string) (string, error) {
-	for {
-		line, ok := <-queue
-		if !ok {
-			return "", errors.New("could not queue line")
-		}
-
-		return line, nil
+	line, ok := <-queue
+	if !ok {
+		return "", errors.New("could not queue line")
 	}
+
+	return line, nil
 }
 
 func (a *announceProcessor) AddLineToQueue(channel string, line string) error {
