@@ -213,17 +213,8 @@ func (w SSEWriter) writePart(buf *bytes.Buffer, evt map[string]interface{}, p st
 
 // formatLevel format level to string
 func (w SSEWriter) formatLevel(evt map[string]interface{}) string {
-	var f Formatter
-
-	f = defaultFormatLevel()
-
-	var s = f(evt["level"])
-
-	if len(s) > 0 {
-		return s
-	}
-
-	return ""
+	f := defaultFormatLevel()
+	return f(evt["level"])
 }
 
 const (
